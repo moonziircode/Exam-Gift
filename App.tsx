@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 
 // --- Reusable Typing Effect Component ---
@@ -47,10 +46,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNext }) => {
   };
 
   return (
-    <div className="w-full max-w-lg p-8 text-center space-y-8 fade-in">
+    <div className="w-full max-w-lg p-8 text-center space-y-8 bg-black/20 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/10 fade-in">
       <TypingEffect
         text="hai, sebelum kamu lanjut, gimana kamu hari ini, are you happy?? how was your day?"
-        className="font-cormorant text-2xl md:text-3xl text-[#dcdcdc] leading-relaxed"
+        className="font-cormorant text-2xl md:text-3xl text-pink-100 leading-relaxed"
         onComplete={() => setIsTyping(false)}
       />
       <div className={`transition-opacity duration-1000 ease-in-out ${isTyping ? 'opacity-0' : 'opacity-100'} space-y-8`}>
@@ -59,12 +58,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNext }) => {
           value={mood}
           onChange={(e) => setMood(e.target.value)}
           placeholder="tulis jawabanmu di sini yaa..."
-          className="w-full bg-[#1a1a1a] text-[#dcdcdc] placeholder-gray-500 border border-[#3a3a3a] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#dcdcdc] transition-all duration-300"
+          className="w-full bg-white/10 text-white placeholder-pink-200/70 border border-pink-300/30 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition-all duration-300"
         />
         <button
           onClick={handleContinue}
           disabled={mood.trim() === ''}
-          className="px-8 py-3 bg-white text-black font-semibold rounded-full shadow-lg hover:scale-105 disabled:bg-gray-500 disabled:cursor-not-allowed disabled:scale-100 transition-all duration-300"
+          className="px-8 py-3 bg-pink-500 text-white font-semibold rounded-full shadow-lg shadow-pink-500/30 hover:bg-pink-600 hover:scale-105 disabled:bg-pink-400/50 disabled:cursor-not-allowed disabled:scale-100 transition-all duration-300"
         >
           Lanjut
         </button>
@@ -79,17 +78,24 @@ interface GiftMessagePageProps {
 }
 
 const GiftMessagePage: React.FC<GiftMessagePageProps> = ({ onNext }) => {
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+
   return (
-    <div className="w-full max-w-lg p-8 text-center space-y-8 fade-in-slow">
-      <p className="font-cormorant text-2xl md:text-3xl text-[#dcdcdc] leading-relaxed">
-        ini kado yang udah aku janjiin buat kamu, semoga kamu happy dengan kadonya yaa, and hope you're open this gift while you are happy
-      </p>
-      <button 
-        onClick={onNext}
-        className="px-8 py-3 bg-white text-black font-semibold rounded-full shadow-lg hover:scale-105 transition-all duration-300 animate-[fadeInAnimation_1.2s_ease-in-out_1s_forwards] opacity-0"
-      >
-        Next
-      </button>
+    <div className="w-full max-w-lg p-8 text-center space-y-8 bg-black/20 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/10 fade-in-slow">
+       <TypingEffect
+        text="ini ada kado, sesuai janji aku buat kamu, semoga kamu happy dan sukaaa dengan kadonya yaa, and hope you're open this gift while you are happy 🌷🤍"
+        className="font-cormorant text-2xl md:text-3xl text-pink-100 leading-relaxed"
+        speed={70}
+        onComplete={() => setIsTypingComplete(true)}
+      />
+      {isTypingComplete && (
+        <button 
+          onClick={onNext}
+          className="px-8 py-3 bg-white text-pink-600 font-semibold rounded-full shadow-lg shadow-white/30 hover:scale-105 transition-all duration-300 fade-in"
+        >
+          Next
+        </button>
+      )}
     </div>
   );
 };
@@ -105,19 +111,19 @@ const SongChoicePage: React.FC = () => {
     const MysteryBox: React.FC<{ title: string; barcodeSrc: string; spotifyUrl: string }> = ({ title, barcodeSrc, spotifyUrl }) => (
         <div 
             onClick={handleChoice} 
-            className="group relative w-full sm:w-64 h-32 bg-black bg-opacity-40 backdrop-blur-sm border border-gray-700 rounded-xl flex items-center justify-center cursor-pointer transition-all duration-500 hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] overflow-hidden"
+            className="group relative w-full sm:w-64 h-32 bg-black/20 backdrop-blur-sm border border-pink-300/30 rounded-xl flex items-center justify-center cursor-pointer transition-all duration-500 hover:border-pink-300 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] overflow-hidden"
         >
-            <span className="font-cormorant text-xl text-gray-400 group-hover:opacity-0 transition-opacity duration-300">{title}</span>
-            <a href={spotifyUrl} target="_blank" rel="noopener noreferrer" className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black bg-opacity-70 p-4">
+            <span className="font-cormorant text-xl text-pink-200 group-hover:opacity-0 transition-opacity duration-300">{title}</span>
+            <a href={spotifyUrl} target="_blank" rel="noopener noreferrer" className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/70 p-4">
                 <img src={barcodeSrc} alt="Spotify Barcode" className="h-full object-contain" />
             </a>
         </div>
     );
 
     return (
-        <div className="w-full max-w-2xl p-8 text-center space-y-8 fade-in">
-            <p className="font-cormorant text-2xl text-[#dcdcdc]">
-                choose these two songs while you read the text
+        <div className="w-full max-w-2xl p-8 text-center space-y-8 bg-black/20 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/10 fade-in">
+            <p className="font-cormorant text-2xl text-pink-100">
+                choose one of these two songs while you read the text
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
                 <MysteryBox title="Mystery Choice 1" barcodeSrc="https://i.ibb.co/K50sMh5/image.png" spotifyUrl="https://open.spotify.com/track/3UN5BBwxoHbwFGxWNvaEj7" />
@@ -151,7 +157,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-black to-[#1a1a1a] text-white flex items-center justify-center p-4">
+    <main className="min-h-screen w-full text-white flex items-center justify-center p-4 relative z-10">
       {renderPage()}
     </main>
   );
